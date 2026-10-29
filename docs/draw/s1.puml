@@ -1,0 +1,30 @@
+@startuml
+left to right direction
+title Диаграмма вариантов использования: Игра «Римско-Бразильская война»
+
+actor "Игрок (Офицер)" as Player
+actor "Торговец (NPC)" as Trader
+actor "ИИ Противника" as AI
+
+rectangle "Система: Игра «Римско-Бразильская война»" {
+    usecase "UC-01: Ведение сражения" as UC1
+    usecase "UC-02: Грабёж каравана" as UC2
+    usecase "UC-03: Торговля ресурсами" as UC3
+    usecase "UC-04: Строительство зданий" as UC4
+    usecase "UC-05: Использование карты" as UC5
+    usecase "UC-06: Разбивка лагеря" as UC6
+    
+    ' Связь include: Грабёж каравана всегда включает бой с охраной
+    UC2 ..> UC1 : <<include>>
+}
+
+Player --> UC1
+Player --> UC2
+Player --> UC3
+Player --> UC4
+Player --> UC5
+Player --> UC6
+
+AI --> UC1
+Trader --> UC3
+@enduml

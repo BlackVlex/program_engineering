@@ -1,0 +1,23 @@
+@startuml
+title SD-01: Ведение сражения (Автор: Панкратов И.)
+autonumber
+actor "Игрок" as Player
+participant "Система" as System
+actor "ИИ Римской армии" as AI
+
+Player -> System: Отдать приказ отрядам (атака/фланг)
+activate System
+System -> AI: Передать данные о манёвре
+AI --> System: Попытка контратаки / перестроения
+System -> System: Рассчитать столкновение (юниты, мораль)
+
+alt [Мораль противника падает]
+    System --> Player: Отряд противника бежит
+    Player -> System: Преследовать или отпустить
+    System --> Player: Победа в сражении, получение ресурсов
+else [Игрок теряет все отряды (Альтернативный поток А1)]
+    System --> Player: Поражение в сражении
+    System --> Player: Предложение загрузить сохранение
+end
+deactivate System
+@enduml

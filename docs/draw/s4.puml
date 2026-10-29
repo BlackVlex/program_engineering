@@ -1,0 +1,24 @@
+@startuml
+title SD-03: Использование карты (Автор: Игнатушин В.)
+autonumber
+actor "Игрок" as Player
+participant "Система" as System
+
+Player -> System: Открыть карту
+activate System
+System --> Player: Отобразить провинции Японии
+
+Player -> System: Выбрать провинцию
+
+alt [Территория разведана]
+    System --> Player: Показать рельеф, свои войска, лагеря, ресурсы
+else [Территория не разведана (Альтернативный поток А2)]
+    System --> Player: Показать «Туман войны»
+    Player -> System: Отправить разведку
+    System -> System: Обновить данные региона
+    System --> Player: Раскрыть данные о регионе
+end
+
+Player -> System: Закрыть карту
+deactivate System
+@enduml

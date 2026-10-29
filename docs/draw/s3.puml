@@ -1,0 +1,26 @@
+@startuml
+title SD-02: Торговля ресурсами (Автор: Суркин И.)
+autonumber
+actor "Игрок" as Player
+participant "Система" as System
+actor "Торговец (NPC)" as Trader
+
+Player -> System: Открыть локацию «Рынок»
+activate System
+System -> Trader: Запросить ассортимент и цены
+Trader --> System: Список ресурсов и цены
+System --> Player: Отобразить список ресурсов
+
+Player -> System: Выбрать ресурс для покупки
+System -> System: Проверить наличие валюты
+
+alt [Валюты достаточно]
+    Player -> System: Подтвердить покупку
+    System -> System: Списать валюту, добавить ресурс
+    System --> Player: Сообщение об успешной покупке
+else [Недостаточно валюты (Альтернативный поток А1)]
+    System --> Player: Ошибка: «Недостаточно средств»
+    Player -> System: Отменить или выбрать другой ресурс
+end
+deactivate System
+@enduml
