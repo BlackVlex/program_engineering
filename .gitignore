@@ -2,6 +2,7 @@
 ~$*.xlsx
 ~$*.pptx
 
+.~lock.report.docx#
 .DS_Store
 Thumbs.db
 
